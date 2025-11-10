@@ -72,11 +72,7 @@ label {
 /* === Inputs === */
 input[type="text"],
 input[type="email"],
-input[type="password"],
-input[type="number"],
-input[type="date"],
-textarea,
-select {
+input[type="password"] {
     width: 100%;
     padding: 0.75rem;
     margin-top: 5px;
@@ -90,35 +86,14 @@ select {
 
 input[type="text"]:focus,
 input[type="email"]:focus,
-input[type="password"]:focus,
-input[type="number"]:focus,
-input[type="date"]:focus,
-textarea:focus,
-select:focus {
+input[type="password"]:focus {
     outline: none;
     border-color: #3b82f6;
     box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25);
 }
 
-input::placeholder,
-textarea::placeholder {
+input::placeholder {
     color: #9ca3af;
-}
-
-/* === Checkbox === */
-input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    margin-right: 8px;
-    cursor: pointer;
-}
-
-/* === Small text === */
-small {
-    color: #6b7280;
-    font-size: 13px;
-    display: block;
-    margin-top: 5px;
 }
 
 /* === Botones === */
@@ -161,7 +136,6 @@ input[type="submit"] {
     margin: 20px auto 20px;
     max-width: 700px;
     padding: 0 20px;
-    flex-wrap: wrap;
 }
 
 .button-container form {
@@ -198,37 +172,17 @@ footer p {
     color: #e5e7eb;
 }
 
-/* === Alertas === */
-#alerta,
-.alert-danger {
+/* === Alerta === */
+#alerta {
     color: #dc2626;
     background-color: #fee2e2;
-    padding: 12px 20px;
+    padding: 10px 20px;
     border-radius: 0.5rem;
     border: 1px solid #fecaca;
     text-align: center;
     font-weight: 600;
-    margin: 15px 0;
-}
-
-.alert-success {
-    color: #065f46;
-    background-color: #d1fae5;
-    padding: 12px 20px;
-    border-radius: 0.5rem;
-    border: 1px solid #6ee7b7;
-    text-align: center;
-    font-weight: 600;
-    margin: 15px 0;
-}
-
-.alert-warning {
-    color: #92400e;
-    background-color: #fef3c7;
-    padding: 12px 20px;
-    border-radius: 0.5rem;
-    border: 1px solid #fcd34d;
-    margin: 15px 0;
+    margin: 10px 0;
+    display: inline-block;
 }
 
 /* === Animaciones === */
@@ -314,28 +268,11 @@ td {
     border: 1px solid #6ee7b7;
 }
 
-.badge-primary {
-    background-color: #dbeafe;
-    color: #1e40af;
-    border: 1px solid #93c5fd;
-}
-
-.badge-danger {
-    background-color: #fee2e2;
-    color: #991b1b;
-    border: 1px solid #fecaca;
-}
-
 /* === Botones de acción en tabla === */
 .actions {
     display: flex;
     gap: 8px;
     justify-content: center;
-    flex-wrap: wrap;
-}
-
-.actions form {
-    margin: 0;
 }
 
 .btn-action {
@@ -347,8 +284,6 @@ td {
     text-decoration: none;
     transition: all 0.2s ease;
     text-align: center;
-    border: none;
-    cursor: pointer;
 }
 
 .btn-edit {
@@ -365,6 +300,7 @@ td {
 .btn-delete {
     background-color: #dc2626;
     color: white;
+    border: none;
 }
 
 .btn-delete:hover {
@@ -408,22 +344,6 @@ td {
     font-weight: 400;
 }
 
-/* === Info box === */
-.info-box {
-    background-color: #f9fafb;
-    padding: 15px;
-    border-radius: 8px;
-    margin: 15px 0;
-    border: 1px solid #e5e7eb;
-}
-
-.info-box h4 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    color: #374151;
-    font-size: 15px;
-}
-
 /* === Enlaces con estilo de botón === */
 a.btn-action {
     display: inline-block;
@@ -444,6 +364,7 @@ a.btn-action:hover {
     box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
 }
 
+/* Si quieres definir un color especial para el botón "Agregar" */
 a.btn-add {
     background-color: #10b981;
 }
@@ -452,10 +373,7 @@ a.btn-add:hover {
     background-color: #059669;
 }
 
-/* ========================================= */
-/* === ESTILOS PARA EL MENÚ PRINCIPAL === */
-/* ========================================= */
-
+/* === Estilos para el menú principal === */
 .menu-section {
     margin-bottom: 40px;
 }
@@ -469,12 +387,12 @@ a.btn-add:hover {
     border-bottom: 2px solid #e5e7eb;
 }
 
-/* === GRID AUTOMÁTICO PARA BOTONES DEL MENÚ === */
+/* === OPCIÓN 3: Grid automático flexible === */
 .btn-group {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
-    gap: 15px !important;
-    margin-bottom: 20px !important;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
 }
 
 /* Botones del menú principal */
@@ -503,7 +421,6 @@ a.btn-add:hover {
 /* Variantes de colores para diferentes acciones */
 .btn-menu.btn-primary {
     background-color: #3b82f6;
-    color: #000000;
 }
 
 .btn-menu.btn-primary:hover {
@@ -529,175 +446,6 @@ a.btn-add:hover {
 .btn-menu.btn-warning:hover {
     background-color: #d97706;
     box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
-}
-
-/* === Estilos para el dashboard === */
-.menu-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin: 20px 0;
-}
-
-.menu-section {
-    background-color: #f9fafb;
-    padding: 20px;
-    border-radius: 0.75rem;
-    border: 2px solid #e5e7eb;
-}
-
-.menu-section h3 {
-    color: #2563eb;
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin: 0 0 20px 0;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #e5e7eb;
-    text-align: center;
-}
-
-/* Contenedor de botones dentro de cada sección */
-.menu-section .btn-group {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 12px !important;
-}
-
-/* Botones del menú */
-.menu-section button,
-.menu-section a.btn-action {
-    display: block !important;
-    width: 100% !important;
-    background-color: #10b981;
-    color: #000000;
-    text-decoration: none;
-    padding: 12px 15px;
-    border-radius: 0.5rem;
-    font-weight: 600;
-    font-size: 14px;
-    text-align: center;
-    transition: all 0.3s ease;
-    font-family: 'Poppins', sans-serif;
-    border: none;
-    cursor: pointer;
-    margin: 0 !important;
-    box-sizing: border-box;
-}
-
-.menu-section button:hover,
-.menu-section a.btn-action:hover {
-    background-color: #059669;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
-}
-
-/* Variantes de colores */
-.menu-section a.btn-add {
-    background-color: #10b981;
-}
-
-.menu-section a.btn-edit {
-    background-color: #3b82f6;
-    color: white;
-}
-
-.menu-section a.btn-edit:hover {
-    background-color: #2563eb;
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
-}
-
-/* ========================================= */
-/* === ESTILOS NUEVOS PARA TURNOS === */
-/* ========================================= */
-
-/* Filtros de formulario */
-.filter-form {
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-}
-
-/* Texto truncado */
-.text-truncate {
-    max-width: 250px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-/* Grid para detalles */
-.details-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    margin-bottom: 20px;
-}
-
-/* Tarjetas de detalle */
-.detail-card {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.detail-card-full {
-    grid-column: 1 / -1;
-}
-
-/* Títulos de tarjetas */
-.card-title {
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-size: 18px;
-}
-
-.card-title-primary {
-    color: #3b82f6;
-}
-
-.card-title-success {
-    color: #10b981;
-}
-
-.card-title-warning {
-    color: #f59e0b;
-}
-
-/* Número de turno grande */
-.turno-number {
-    font-size: 24px;
-    font-weight: bold;
-    color: #1f2937;
-}
-
-/* Badge para código */
-.code-badge {
-    font-family: monospace;
-    font-size: 15px;
-    background-color: #f3f4f6;
-    padding: 4px 8px;
-    border-radius: 4px;
-    display: inline-block;
-}
-
-/* Tarjeta de acciones */
-.actions-card {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.actions-card h3 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    color: #1f2937;
-}
-
-.actions-card form {
-    display: inline;
 }
 
 /* === Estilos responsivos === */
@@ -743,19 +491,8 @@ a.btn-add:hover {
         padding: 0 20px;
     }
 
+    /* En móviles, los botones ocupan toda la fila */
     .btn-group {
-        grid-template-columns: 1fr !important;
-    }
-    
-    .menu-section .btn-group {
-        grid-template-columns: 1fr !important;
-    }
-    
-    .details-grid {
         grid-template-columns: 1fr;
-    }
-    
-    .detail-card-full {
-        grid-column: 1;
     }
 }

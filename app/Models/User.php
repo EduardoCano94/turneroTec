@@ -12,14 +12,15 @@ class User extends Authenticatable
 
     protected $table = 'usuario';
     protected $primaryKey = 'id';
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $fillable = [
         'nombre',
         'apellido',
         'email',
         'password',
-        'disponible'
+        'disponible',
+        'name'
     ];
 
     protected $hidden = [
@@ -31,4 +32,17 @@ class User extends Authenticatable
     {
         return $this->password;
     }
+
+    public function getNameAttribute()
+{
+    return $this->nombre . ' ' . $this->apellido;
+}
+
+// Mutador para cuando se asigne 'name'
+public function setNameAttribute($value)
+{
+    $partes = explode(' ', $value, 2);
+    $this->attributes['nombre'] = $partes[0];
+    $this->attributes['apellido'] = $partes[1] ?? '';
+}
 }

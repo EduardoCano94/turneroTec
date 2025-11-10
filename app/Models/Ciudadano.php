@@ -10,7 +10,7 @@ class Ciudadano extends Model
     use HasFactory;
 
     protected $table = 'ciudadano';
-    protected $primaryKey = 'ID';
+    protected $primaryKey = 'id';
     public $timestamps = false;
 
     protected $fillable = [

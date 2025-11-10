@@ -2,44 +2,33 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Turno extends Model
 {
     use HasFactory;
 
-    protected $table = 'turno';
-    protected $primaryKey = 'id';
-    public $timestamps = false;
-
+    protected $table = 'turnos';
+    
     protected $fillable = [
+        'numero',
         'fecha',
         'descripcion',
-        'usuario_id',
-        'tramite_id',
-        'ciudadano_id',
         'estado',
-        'disponible'
+        'id_ciudadano',
+        'tramite_id', // ← Agregado
     ];
 
-    protected $casts = [
-    'estado' => \App\Enums\EstadoTurno::class, 
-    ];
-
-
-    public function usuario()
+    // Relación: Un turno pertenece a un ciudadano
+    public function ciudadano()
     {
-        return $this->belongsTo(Usuario::class, 'usuario_id');
+        return $this->belongsTo(Ciudadano::class, 'id_ciudadano');
     }
 
+    // Relación: Un turno pertenece a un trámite
     public function tramite()
     {
         return $this->belongsTo(Tramite::class, 'tramite_id');
-    }
-
-    public function ciudadano()
-    {
-        return $this->belongsTo(Ciudadano::class, 'ciudadano_id');
     }
 }

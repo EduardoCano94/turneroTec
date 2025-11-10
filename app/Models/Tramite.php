@@ -2,23 +2,29 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Tramite extends Model
 {
     use HasFactory;
 
-    protected $table = 'tramite';
-    protected $primaryKey = 'id';
-    public $timestamps = false;
-
+    protected $table = 'tramites';
+    
     protected $fillable = [
         'nombre',
         'descripcion',
-        'disponible'
+        'costo',
+        'tiempo_estimado',
+        'activo',
     ];
 
+    protected $casts = [
+        'costo' => 'decimal:2',
+        'activo' => 'boolean',
+    ];
+
+    // Relación: Un trámite puede tener muchos turnos
     public function turnos()
     {
         return $this->hasMany(Turno::class, 'tramite_id');

@@ -3,78 +3,145 @@
 namespace App\Http\Controllers;
 
 use App\Models\Turno;
-use App\Models\Usuario;
-use App\Models\Tramite;
 use App\Models\Ciudadano;
 use Illuminate\Http\Request;
+use App\Models\Tramite;
 
 class TurnoController extends Controller
 {
-    // Mostrar todos los turnos
-    public function index()
+    // Listar todos los turnos con filtros
+    public function index(Request $request)
     {
-        $turnos = Turno::with(['usuario','tramite','ciudadano'])->get();
+        $query = Turno::with('ciudadano');
+
+        // Filtro por fecha
+        if ($request->filled('fecha')) {
+            $query->whereDate('fecha', $request->fecha);
+        }
+
+        // Filtro por estado
+        if ($request->filled('estado')) {
+            $query->where('estado', $request->estado);
+        }
+
+        $turnos = $query->orderBy('numero', 'desc')->get();
+        
         return view('turnos.index', compact('turnos'));
     }
 
-    // Mostrar formulario para crear
-    public function create()
-    {
-        $usuarios = Usuario::all();
-        $tramites = Tramite::all();
-        $ciudadanos = Ciudadano::all();
-
-        return view('turnos.create', compact('usuarios','tramites','ciudadanos'));
-    }
+    // Mostrar formulario de creación
+   public function create()
+{
+    $ciudadanos = Ciudadano::all();
+    $tramites = Tramite::where('activo', true)->orderBy('nombre')->get(); 
+    
+    // Generar número de turno automáticamente
+    $ultimoTurno = Turno::max('numero');
+    $nuevoNumero = $ultimoTurno ? $ultimoTurno + 1 : 1;
+    
+    return view('turnos.create', compact('ciudadanos', 'tramites', 'nuevoNumero')); 
+}
 
     // Guardar nuevo turno
     public function store(Request $request)
+{
+    $request->validate([
+        'numero' => 'required|integer|unique:turnos,numero',
+        'fecha' => 'required|date',
+        'tramite_id' => 'required|exists:tramites,id', 
+        'descripcion' => 'nullable|string',
+        'id_ciudadano' => 'required|exists:ciudadano,id',
+    ]);
+
+    Turno::create([
+        'numero' => $request->numero,
+        'fecha' => $request->fecha,
+        'tramite_id' => $request->tramite_id, 
+        'descripcion' => $request->descripcion,
+        'estado' => 'En espera',
+        'id_ciudadano' => $request->id_ciudadano,
+    ]);
+
+    return redirect()->route('turnos.index')
+                     ->with('success', 'Turno creado correctamente.');
+}
+
+    // Mostrar un turno específico
+    public function show($id)
     {
-        $request->validate([
-            'fecha' => 'required|date',
-            'descripcion' => 'required|string',
-            'usuario_id' => 'required|exists:usuario,id',
-            'tramite_id' => 'required|exists:tramite,id',
-            'ciudadano_id' => 'required|exists:ciudadano,id',
-            'estado' => 'required|string'
-        ]);
-
-        Turno::create($request->all());
-
-        return redirect()->route('turnos.index')->with('success', 'Turno creado correctamente.');
+        $turno = Turno::with('ciudadano')->findOrFail($id);
+        return view('turnos.show', compact('turno'));
     }
 
     // Mostrar formulario de edición
-    public function edit(Turno $turno)
+    public function edit($id)
     {
-        $usuarios = Usuario::all();
-        $tramites = Tramite::all();
+        $turno = Turno::findOrFail($id);
         $ciudadanos = Ciudadano::all();
-
-        return view('turnos.edit', compact('turno','usuarios','tramites','ciudadanos'));
+        return view('turnos.edit', compact('turno', 'ciudadanos'));
     }
 
     // Actualizar turno
-    public function update(Request $request, Turno $turno)
+    public function update(Request $request, $id)
     {
         $request->validate([
+            'numero' => 'required|integer|unique:turnos,numero,' . $id,
             'fecha' => 'required|date',
             'descripcion' => 'required|string',
-            'usuario_id' => 'required|exists:usuario,id',
-            'tramite_id' => 'required|exists:tramite,id',
-            'ciudadano_id' => 'required|exists:ciudadano,id',
-            'estado' => 'required|string'
+            'estado' => 'required|in:En espera,Ya atendido',
+            'id_ciudadano' => 'required|exists:ciudadano,id',
         ]);
 
+        $turno = Turno::findOrFail($id);
         $turno->update($request->all());
 
-        return redirect()->route('turnos.index')->with('success', 'Turno actualizado correctamente.');
+        return redirect()->route('turnos.index')
+                         ->with('success', 'Turno actualizado correctamente.');
     }
 
     // Eliminar turno
-    public function destroy(Turno $turno)
+    public function destroy($id)
     {
+        $turno = Turno::findOrFail($id);
         $turno->delete();
-        return redirect()->route('turnos.index')->with('success', 'Turno eliminado.');
+
+        return redirect()->route('turnos.index')
+                         ->with('success', 'Turno eliminado correctamente.');
     }
+
+    // Cambiar estado del turno
+    public function cambiarEstado($id)
+    {
+        $turno = Turno::findOrFail($id);
+        
+        $turno->estado = $turno->estado === 'En espera' ? 'Ya atendido' : 'En espera';
+        $turno->save();
+
+        return redirect()->back()
+                         ->with('success', 'Estado del turno actualizado.');
+    }
+
+// Mostrar solo turnos en espera
+public function enEspera()
+{
+    $turnos = Turno::with('ciudadano')
+                   ->where('estado', 'En espera')
+                   ->orderBy('numero', 'desc')
+                   ->get();
+    
+    return view('turnos.index', compact('turnos'));
+}
+
+// Mostrar solo turnos atendidos
+public function atendidos()
+{
+    $turnos = Turno::with('ciudadano')
+                   ->where('estado', 'Ya atendido')
+                   ->orderBy('numero', 'desc')
+                   ->get();
+    
+    return view('turnos.index', compact('turnos'));
+}
+
+
 }
