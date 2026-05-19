@@ -14,6 +14,7 @@ El sistema está diseñado para que el administrador pueda registrar informació
 
 - Usuario: `administrador@dominio.com`
 - Contraseña: `12345678`
+<img width="1820" height="987" alt="image" src="https://github.com/user-attachments/assets/9c20c79d-f9df-4216-953b-90ebae6c5d95" />
 
 ## Pasos para iniciar sesión
 
