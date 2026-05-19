@@ -1,61 +1,304 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Manual de Usuario – Sistema de Turnero
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 1. Introducción
 
-## About Laravel
+El Sistema de Turnero es una aplicación web desarrollada en Laravel que permite administrar ciudadanos, trámites, usuarios y turnos de atención.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+El sistema está diseñado para que el administrador pueda registrar información, consultar datos y controlar el estado de atención de los turnos.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+# 2. Acceso al sistema
 
-## Learning Laravel
+## Credenciales de acceso
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Usuario: `administrador@dominio.com`
+- Contraseña: `12345678`
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Pasos para iniciar sesión
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. Abrir el navegador web.
+2. Ingresar a la dirección del sistema.
+3. Escribir el correo electrónico.
+4. Escribir la contraseña.
+5. Presionar el botón **Iniciar sesión**.
 
-## Laravel Sponsors
+Si las credenciales son correctas, el sistema mostrará el panel principal.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+# 3. Panel principal
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Después de iniciar sesión, el sistema permite acceder a los distintos módulos:
 
-## Contributing
+- Ciudadanos
+- Turnos
+- Trámites
+- Usuarios
+- Perfil
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Desde este panel el administrador puede gestionar toda la información del sistema.
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# 4. Módulo de Ciudadanos
 
-## Security Vulnerabilities
+Este módulo permite registrar, consultar, editar y eliminar ciudadanos.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 4.1 Registrar ciudadano
 
-## License
+### Pasos:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1. Entrar al menú **Ciudadanos**.
+2. Seleccionar **Registrar ciudadano**.
+3. Capturar:
+   - Nombre
+   - Apellido
+   - Clave de identificación
+4. Presionar **Guardar**.
+
+### Validaciones
+
+- Todos los campos son obligatorios.
+- La clave de identificación no puede repetirse.
+
+Cuando el registro es correcto, el sistema muestra un mensaje de confirmación.
+
+---
+
+## 4.2 Consultar ciudadanos
+
+### Pasos:
+
+1. Entrar al módulo **Ciudadanos**.
+2. El sistema mostrará la lista de ciudadanos registrados.
+
+La información visible incluye:
+
+- Nombre
+- Apellido
+- Clave de identificación
+
+---
+
+## 4.3 Buscar ciudadano
+
+### Pasos:
+
+1. Entrar a **Buscar ciudadano**.
+2. Escribir la clave de identificación.
+3. Presionar **Buscar**.
+
+Si el ciudadano existe, el sistema mostrará sus datos.
+
+Si no existe, aparecerá un mensaje indicando que no fue encontrado.
+
+---
+
+## 4.4 Editar ciudadano
+
+### Pasos:
+
+1. Seleccionar el ciudadano.
+2. Presionar **Editar**.
+3. Modificar los datos necesarios.
+4. Presionar **Actualizar**.
+
+El sistema guardará automáticamente los cambios.
+
+---
+
+## 4.5 Eliminar ciudadano
+
+### Pasos:
+
+1. Entrar al apartado **Eliminar ciudadanos**.
+2. Seleccionar el ciudadano.
+3. Presionar **Eliminar**.
+4. Confirmar la acción.
+
+El ciudadano será eliminado del sistema.
+
+---
+
+# 5. Módulo de Turnos
+
+Este módulo permite generar y administrar turnos de atención.
+
+## 5.1 Crear turno
+
+### Pasos:
+
+1. Entrar al módulo **Turnos**.
+2. Seleccionar **Crear turno**.
+3. Capturar la información:
+   - Número de turno
+   - Fecha
+   - Trámite
+   - Descripción
+   - Ciudadano
+4. Presionar **Guardar**.
+
+### Características
+
+- El número de turno se genera automáticamente.
+- El estado inicial del turno es **En espera**.
+
+---
+
+## 5.2 Consultar turnos
+
+### Pasos:
+
+1. Entrar al módulo **Turnos**.
+2. El sistema mostrará todos los turnos registrados.
+
+La lista incluye:
+
+- Número de turno
+- Fecha
+- Estado
+- Ciudadano asociado
+
+---
+
+## 5.3 Filtrar turnos
+
+El sistema permite realizar filtros por:
+
+- Fecha
+- Estado
+
+### Estados disponibles
+
+- En espera
+- Ya atendido
+
+---
+
+## 5.4 Cambiar estado del turno
+
+### Pasos:
+
+1. Buscar el turno.
+2. Presionar el botón de cambio de estado.
+
+El sistema cambiará automáticamente entre:
+
+- En espera
+- Ya atendido
+
+---
+
+## 5.5 Editar turno
+
+### Pasos:
+
+1. Seleccionar el turno.
+2. Presionar **Editar**.
+3. Modificar los datos.
+4. Guardar cambios.
+
+---
+
+## 5.6 Eliminar turno
+
+### Pasos:
+
+1. Seleccionar el turno.
+2. Presionar **Eliminar**.
+3. Confirmar la acción.
+
+El turno será eliminado del sistema.
+
+---
+
+# 6. Módulo de Trámites
+
+Este módulo permite administrar los trámites disponibles.
+
+## Funciones disponibles
+
+- Registrar trámites
+- Buscar trámites
+- Editar trámites
+- Eliminar trámites
+- Consultar trámites
+
+Los trámites activos pueden utilizarse al crear turnos.
+
+---
+
+# 7. Módulo de Usuarios
+
+Este módulo permite administrar usuarios del sistema.
+
+## Funciones disponibles
+
+- Registrar usuarios
+- Consultar usuarios
+- Buscar usuarios
+- Editar usuarios
+- Eliminar usuarios
+
+---
+
+# 8. Perfil de usuario
+
+El sistema permite que el usuario administrador pueda:
+
+- Editar su información
+- Actualizar contraseña
+- Eliminar cuenta
+
+---
+
+# 9. Mensajes del sistema
+
+El sistema muestra mensajes automáticos para informar:
+
+- Registro exitoso
+- Actualización correcta
+- Eliminación realizada
+- Errores de validación
+- Información no encontrada
+
+---
+
+# 10. Recomendaciones de uso
+
+- Mantener seguras las credenciales de acceso.
+- Verificar la información antes de guardar.
+- No duplicar claves de identificación.
+- Cerrar sesión al finalizar el uso del sistema.
+
+---
+
+# 11. Cierre de sesión
+
+Para salir del sistema:
+
+1. Presionar el menú del usuario.
+2. Seleccionar **Cerrar sesión**.
+
+Esto finalizará la sesión actual del administrador.
+
+---
+
+# 12. Tecnologías utilizadas
+
+El sistema fue desarrollado con:
+
+- Laravel
+- PHP
+- MySQL
+- Blade
+- HTML
+- CSS
+- JavaScript
+
+---
+
+# 13. Conclusión
+
+El Sistema de Turnero permite llevar un control organizado de ciudadanos, trámites y turnos de atención, facilitando el trabajo administrativo y mejorando la gestión de los procesos dentro de la institución.
